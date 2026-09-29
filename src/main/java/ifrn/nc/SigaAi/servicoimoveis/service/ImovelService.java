@@ -1,0 +1,67 @@
+package ifrn.nc.SigaAi.servicoimoveis.service;
+
+import ifrn.nc.SigaAi.servicoimoveis.exception.ImovelNaoEncontradoExcption;
+import ifrn.nc.SigaAi.servicoimoveis.model.Imovel;
+import ifrn.nc.SigaAi.servicoimoveis.model.dto.foto.fotoRequestDTO;
+import ifrn.nc.SigaAi.servicoimoveis.model.dto.foto.fotoResponseDTO;
+import ifrn.nc.SigaAi.servicoimoveis.model.dto.imovel.ImovelRequestDTO;
+import ifrn.nc.SigaAi.servicoimoveis.model.dto.imovel.ImovelResponseDTO;
+import ifrn.nc.SigaAi.servicoimoveis.model.foto;
+import ifrn.nc.SigaAi.servicoimoveis.model.mapper.fotoMapper;
+import ifrn.nc.SigaAi.servicoimoveis.model.mapper.imovelMapper;
+import ifrn.nc.SigaAi.servicoimoveis.repository.ImovelRepository;
+import ifrn.nc.SigaAi.servicoimoveis.repository.fotoRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+
+@Service
+@AllArgsConstructor
+public class ImovelService {
+
+    private  final ImovelRepository imovelRepository;
+    private final imovelMapper Mapper;
+
+    public ImovelResponseDTO salvarImovel(ImovelRequestDTO request) {
+        Imovel imovelModel = Mapper.toModel(request);
+        imovelRepository.save(imovelModel);
+        return Mapper.toResponseDTO(imovelModel);
+
+    }
+
+    public ImovelResponseDTO buscarImovelId(Long id) {
+        Imovel imovel = imovelRepository.findbyId(id).orElseThrow(
+                () -> new ImovelNaoEncontradoExcption(id)
+        );
+        return Mapper.toResponseDTO(imovel);
+    }
+
+    public List<ImovelResponseDTO> listaImoveis() {
+        List<Imovel> imoveis = imovelRepository.findAll();
+        return Mapper.toListResponseDTO(imoveis);
+    }
+
+    public ImovelResponseDTO atualizarImovel(Long id, ImovelRequestDTO request) {
+        Imovel imovel = imovelRepository.findbyId(id).orElseThrow(
+                () -> new ImovelNaoEncontradoExcption(id)
+        );
+        Imovel imovelModel = Mapper.toModel(request);
+        imovelModel.setId(imovel.getId());
+
+        imovelRepository.save(imovelModel);
+        return Mapper.toResponseDTO(imovelModel);
+    }
+
+    public void deletarImovel(Long id) {
+        Imovel imovel = imovelRepository.findbyId(id).orElseThrow(
+                () -> new ImovelNaoEncontradoExcption(id)
+        );
+        imovelRepository.deleteById(id);
+    }
+
+
+
+
+}
