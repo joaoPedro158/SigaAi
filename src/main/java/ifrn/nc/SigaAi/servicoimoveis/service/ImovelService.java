@@ -38,8 +38,21 @@ public class ImovelService {
         return Mapper.toResponseDTO(imovel);
     }
 
-    public List<ImovelResponseDTO> listaImoveis() {
-        List<Imovel> imoveis = imovelRepository.findAll();
+    public List<ImovelResponseDTO> listaImoveis(String endereco, Double valor) {
+        List<Imovel> imoveis;
+        if (endereco != null && valor != null) {
+            imoveis = imovelRepository.findByEnderecoContainingIgnoreCaseAndValorAluguelLessThanEqual(endereco, valor);
+
+        } else if (endereco != null) {
+            imoveis = imovelRepository.findByEnderecoContainingIgnoreCase(endereco);
+            return Mapper.toListResponseDTO(imoveis);
+        } else if (valor != null) {
+            imoveis = imovelRepository.findByValorAluguelLessThan(valor);
+            return Mapper.toListResponseDTO(imoveis);
+        } else {
+            imoveis = imovelRepository.findAll();
+
+        }
         return Mapper.toListResponseDTO(imoveis);
     }
 

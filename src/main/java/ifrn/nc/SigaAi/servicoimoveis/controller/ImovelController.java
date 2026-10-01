@@ -23,8 +23,8 @@ public class ImovelController {
     private  final ImovelService imovelService;
 
     @GetMapping
-    public ResponseEntity<List<ImovelResponseDTO>> listar() {
-        List<ImovelResponseDTO> imoveis = imovelService.listaImoveis();
+    public ResponseEntity<List<ImovelResponseDTO>> listar(@RequestParam String endereco, @RequestParam Double valor) {
+        List<ImovelResponseDTO> imoveis = imovelService.listaImoveis(endereco, valor);
         return ResponseEntity.ok(imoveis);
     }
 
@@ -40,5 +40,6 @@ public class ImovelController {
         ImovelResponseDTO response = imovelService.buscarImovelId(id);
         return ResponseEntity.ok(response);
     }
+
 
 }
