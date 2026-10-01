@@ -32,7 +32,7 @@ public class ImovelService {
     }
 
     public ImovelResponseDTO buscarImovelId(Long id) {
-        Imovel imovel = imovelRepository.findbyId(id).orElseThrow(
+        Imovel imovel = imovelRepository.findById(id).orElseThrow(
                 () -> new ImovelNaoEncontradoExcption(id)
         );
         return Mapper.toResponseDTO(imovel);
@@ -44,7 +44,7 @@ public class ImovelService {
     }
 
     public ImovelResponseDTO atualizarImovel(Long id, ImovelRequestDTO request) {
-        Imovel imovel = imovelRepository.findbyId(id).orElseThrow(
+        Imovel imovel = imovelRepository.findById(id).orElseThrow(
                 () -> new ImovelNaoEncontradoExcption(id)
         );
         Imovel imovelModel = Mapper.toModel(request);
@@ -55,7 +55,7 @@ public class ImovelService {
     }
 
     public void deletarImovel(Long id) {
-        Imovel imovel = imovelRepository.findbyId(id).orElseThrow(
+        Imovel imovel = imovelRepository.findById(id).orElseThrow(
                 () -> new ImovelNaoEncontradoExcption(id)
         );
         imovelRepository.deleteById(id);

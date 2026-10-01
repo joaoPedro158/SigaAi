@@ -1,15 +1,17 @@
 package ifrn.nc.SigaAi.servicoimoveis.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Getter
-@Setter
+@Entity
+@Table(name = "imoveis")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Imovel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String endereco;
     private Double valorAluguel;
