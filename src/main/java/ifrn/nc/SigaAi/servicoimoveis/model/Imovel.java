@@ -5,7 +5,8 @@ import lombok.*;
 
 @Entity
 @Table(name = "imoveis")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Imovel {

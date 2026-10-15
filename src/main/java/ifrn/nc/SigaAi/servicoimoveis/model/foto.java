@@ -1,16 +1,24 @@
 package ifrn.nc.SigaAi.servicoimoveis.model;
 
+import jakarta.persistence.*;
 import jdk.jfr.BooleanFlag;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
+@Table(name = "fotos")
 @NoArgsConstructor
+@Getter
+@Setter
 public class foto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long imovelId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "imovel_id")
+    private Imovel imovelId;
     private String url;
     private boolean principal;
     private String legenda;
