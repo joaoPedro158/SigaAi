@@ -33,10 +33,14 @@ public class GlobalExceptionHamdle {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ImovelNaoEncontradoExcption.class)
-    public ProblemDetail handleNaoEncontrado(MethodArgumentNotValidException ex) {
-        var pd =ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
-        pd.setTitle("Imovel nao encontrado");
+    public ProblemDetail handleNaoEncontrado(
+            ImovelNaoEncontradoExcption ex) {
+
+        var pd = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+
+        pd.setTitle("Imóvel não encontrado");
         pd.setDetail(ex.getMessage());
+
         return pd;
     }
 

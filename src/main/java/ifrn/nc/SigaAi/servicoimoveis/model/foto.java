@@ -8,7 +8,6 @@ import lombok.*;
 @Table(name = "fotos")
 @Data
 @AllArgsConstructor
-@Table(name = "fotos")
 @NoArgsConstructor
 @Getter
 @Setter
