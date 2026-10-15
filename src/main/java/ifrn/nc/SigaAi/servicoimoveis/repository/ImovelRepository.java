@@ -21,4 +21,6 @@ public interface ImovelRepository extends JpaRepository<Imovel, Long> {
 
     List<Imovel> findByEnderecoContainingIgnoreCaseAndValorAluguelLessThanEqual(String endereco, Double valor);
 
+    Optional<Imovel> findById(Long id);
+
 }

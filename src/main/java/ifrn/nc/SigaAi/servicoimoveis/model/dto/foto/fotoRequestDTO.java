@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class fotoRequestDTO {
-    @NotNull @NotBlank
+    @NotNull
     private Long imovelId;
 
     @NotNull @NotBlank

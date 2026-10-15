@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jdk.jfr.BooleanFlag;
 import lombok.*;
 
+@Entity
+@Table(name = "fotos")
 @Data
 @AllArgsConstructor
 @Table(name = "fotos")
@@ -18,7 +20,9 @@ public class foto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "imovel_id")
-    private Imovel imovelId;
+
+    private Imovel imovel;
+
     private String url;
     private boolean principal;
     private String legenda;
