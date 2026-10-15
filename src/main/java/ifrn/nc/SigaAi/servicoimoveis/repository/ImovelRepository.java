@@ -19,4 +19,6 @@ public interface ImovelRepository extends JpaRepository<Imovel, Long> {
 
     List<Imovel> findByEnderecoContainingIgnoreCase(String trecho);
 
+    List<Imovel> findByEnderecoContainingIgnoreCaseAndValorAluguelLessThanEqual(String endereco, Double valor);
+
 }
