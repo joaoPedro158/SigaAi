@@ -23,7 +23,9 @@ public class ImovelController {
     private  final ImovelService imovelService;
 
     @GetMapping
-    public ResponseEntity<List<ImovelResponseDTO>> listar(@RequestParam String endereco, @RequestParam Double valor) {
+    public ResponseEntity<List<ImovelResponseDTO>> listar(
+            @RequestParam (required = false) String endereco,
+            @RequestParam (required = false) Double valor) {
         List<ImovelResponseDTO> imoveis = imovelService.listaImoveis(endereco, valor);
         return ResponseEntity.ok(imoveis);
     }

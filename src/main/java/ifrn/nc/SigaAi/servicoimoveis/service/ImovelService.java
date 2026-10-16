@@ -53,7 +53,8 @@ public class ImovelService {
             imoveis = imovelRepository.findAll();
 
         }
-        return Mapper.toListResponseDTO(imoveis);
+//        return Mapper.toListResponseDTO(imoveis);
+        return imoveis.stream().map(Mapper::toResponseDTO).toList();
     }
 
     public ImovelResponseDTO atualizarImovel(Long id, ImovelRequestDTO request) {
