@@ -2,15 +2,10 @@ package ifrn.nc.SigaAi.servicoimoveis.service;
 
 import ifrn.nc.SigaAi.servicoimoveis.exception.ImovelNaoEncontradoExcption;
 import ifrn.nc.SigaAi.servicoimoveis.model.Imovel;
-import ifrn.nc.SigaAi.servicoimoveis.model.dto.foto.fotoRequestDTO;
-import ifrn.nc.SigaAi.servicoimoveis.model.dto.foto.fotoResponseDTO;
 import ifrn.nc.SigaAi.servicoimoveis.model.dto.imovel.ImovelRequestDTO;
 import ifrn.nc.SigaAi.servicoimoveis.model.dto.imovel.ImovelResponseDTO;
-import ifrn.nc.SigaAi.servicoimoveis.model.foto;
-import ifrn.nc.SigaAi.servicoimoveis.model.mapper.fotoMapper;
 import ifrn.nc.SigaAi.servicoimoveis.model.mapper.imovelMapper;
 import ifrn.nc.SigaAi.servicoimoveis.repository.ImovelRepository;
-import ifrn.nc.SigaAi.servicoimoveis.repository.fotoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -61,15 +56,16 @@ public class ImovelService {
         Imovel imovel = imovelRepository.findById(id).orElseThrow(
                 () -> new ImovelNaoEncontradoExcption(id)
         );
-        Imovel imovelModel = Mapper.toModel(request);
-        imovelModel.setId(imovel.getId());
+        imovel.setEndereco(request.getEndereco());
+        imovel.setValorAluguel(request.getValorAluguel());
+        imovel.setDescricao(request.getDescricao());
 
-        imovelRepository.save(imovelModel);
-        return Mapper.toResponseDTO(imovelModel);
+        Imovel imovelAtualizado = imovelRepository.save(imovel);
+        return Mapper.toResponseDTO(imovelAtualizado);
     }
 
     public void deletarImovel(Long id) {
-        Imovel imovel = imovelRepository.findById(id).orElseThrow(
+        imovelRepository.findById(id).orElseThrow(
                 () -> new ImovelNaoEncontradoExcption(id)
         );
         imovelRepository.deleteById(id);

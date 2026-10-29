@@ -1,11 +1,7 @@
 package ifrn.nc.SigaAi.servicoimoveis.controller;
 
-import ifrn.nc.SigaAi.servicoimoveis.exception.ImovelNaoEncontradoExcption;
-import ifrn.nc.SigaAi.servicoimoveis.model.mapper.imovelMapper;
-import ifrn.nc.SigaAi.servicoimoveis.model.Imovel;
 import ifrn.nc.SigaAi.servicoimoveis.model.dto.imovel.ImovelResponseDTO;
 import ifrn.nc.SigaAi.servicoimoveis.model.dto.imovel.ImovelRequestDTO;
-import ifrn.nc.SigaAi.servicoimoveis.repository.ImovelRepository;
 import ifrn.nc.SigaAi.servicoimoveis.service.ImovelService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -41,6 +37,20 @@ public class ImovelController {
     public ResponseEntity<ImovelResponseDTO> buscarImovel(@PathVariable Long id) {
         ImovelResponseDTO response = imovelService.buscarImovelId(id);
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ImovelResponseDTO> atualizarImovel(
+            @PathVariable Long id,
+            @Valid @RequestBody ImovelRequestDTO request) {
+        ImovelResponseDTO response = imovelService.atualizarImovel(id, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarImovel(@PathVariable Long id) {
+        imovelService.deletarImovel(id);
+        return ResponseEntity.noContent().build();
     }
 
 
