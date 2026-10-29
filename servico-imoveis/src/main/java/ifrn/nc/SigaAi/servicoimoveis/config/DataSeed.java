@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
-import ifrn.sigai.servicousuarios.repository.UsuarioRepository;
 
 @Component
 @Profile("dev")
