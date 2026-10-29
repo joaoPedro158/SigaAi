@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +49,7 @@ public class GlobalExceptionHamdle {
     public ProblemDetail handleValidation(Exception ex) {
         var pd =ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         pd.setTitle("Erro interno do servidor");
-        pd.setDetail(ex.getMessage() + "ocorreu um erro inesperado");
+        pd.setDetail("Ocorreu um erro inesperado");
         return pd;
     }
 
