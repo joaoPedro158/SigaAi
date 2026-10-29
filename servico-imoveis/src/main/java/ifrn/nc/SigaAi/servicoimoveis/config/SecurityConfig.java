@@ -1,6 +1,7 @@
-package ifrn.nc.SigaAi.servicoimoveis.security;
+package ifrn.nc.SigaAi.servicoimoveis.config;
 
 
+import ifrn.nc.SigaAi.servicoimoveis.security.JwtAuthenticarionFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -42,7 +43,7 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/imovel/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/imovel/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/imovel/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/imovel/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
